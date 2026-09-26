@@ -107,7 +107,6 @@ button { font: inherit; }
 .button-primary:hover { color: #fffdf8; background: #3d5036; }
 .button-secondary { border: 1px solid var(--line); background: var(--surface); }
 .button-secondary:hover { color: var(--ink); background: var(--surface-soft); }
-.microcopy { margin-top: 20px; color: var(--muted); font-size: .82rem; }
 
 .hero-art { position: relative; min-height: 530px; display: grid; place-items: center; }
 .hero-orbit { position: absolute; width: min(95%, 505px); aspect-ratio: 1; border-radius: 50%; background: var(--green-soft); transform: rotate(-8deg); }

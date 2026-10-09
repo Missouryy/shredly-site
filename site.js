@@ -39,7 +39,6 @@
   header.append(canvas);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const colorMode = window.matchMedia('(prefers-color-scheme: dark)');
   const height = 112;
   let width = 0;
   let previousScroll = Math.max(0, window.scrollY);
@@ -47,14 +46,8 @@
   let frame = 0;
   let lastTime = 0;
   let strips = [];
-  let colors = [];
-
-  function updateColors() {
-    const style = getComputedStyle(document.documentElement);
-    colors = ['#efe6d5', '--orange', '--green', '--orange-soft'].map(color =>
-      color.startsWith('--') ? style.getPropertyValue(color).trim() : color
-    );
-  }
+  // Keep paper colors consistent when the site theme changes.
+  const colors = ['#efe6d5', '#eb9253', '#587442', '#f8e1cb'];
 
   function resize() {
     width = header.clientWidth;
@@ -128,10 +121,5 @@
     if (document.hidden) stop();
   });
   reducedMotion.addEventListener('change', stop);
-  colorMode.addEventListener('change', updateColors);
-  new MutationObserver(updateColors).observe(document.documentElement, {
-    attributes: true, attributeFilter: ['data-theme']
-  });
   resize();
-  updateColors();
 })();

@@ -81,6 +81,34 @@ button { font: inherit; }
 .skip-link:focus { top: 12px; }
 
 .site-header { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+/* A narrow shredder mouth where the page passes beneath the navigation. */
+.site-header::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  bottom: -5px;
+  left: 16px;
+  right: 16px;
+  height: 10px;
+  border: 1px solid color-mix(in srgb, var(--orange) 55%, var(--line));
+  border-radius: 999px;
+  background: linear-gradient(#050605, #20251f);
+  box-shadow: inset 0 2px 3px #000, 0 2px 0 var(--orange-soft);
+  pointer-events: none;
+}
+.shred-particles {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 3px);
+  left: 0;
+  width: 100%;
+  height: 112px;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shred-particles { display: none; }
+}
+
 .header-inner { min-height: 82px; display: flex; align-items: center; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: 1.23rem; font-weight: 800; letter-spacing: -.045em; }
 .brand img { width: 34px; height: 34px; border-radius: 10px; }

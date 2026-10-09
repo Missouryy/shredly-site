@@ -46,8 +46,17 @@
   let frame = 0;
   let lastTime = 0;
   let strips = [];
-  // Keep paper colors consistent when the site theme changes.
-  const colors = ['#efe6d5', '#eb9253', '#587442', '#f8e1cb'];
+  const colorMode = window.matchMedia('(prefers-color-scheme: dark)');
+  let colors = [];
+
+  function updateColors() {
+    const theme = document.documentElement.dataset.theme;
+    const dark = theme === 'dark' || (!theme && colorMode.matches);
+    // Deeper inks on light paper; brighter paper tones on a dark background.
+    colors = dark
+      ? ['#efe6d5', '#e9a16c', '#acc486', '#cfb39a']
+      : ['#a89c86', '#cf713b', '#587442', '#bea687'];
+  }
 
   function resize() {
     width = header.clientWidth;
@@ -79,7 +88,7 @@
         angle: (Math.random() - 0.5) * 0.5,
         spin: (Math.random() - 0.5) * 3,
         age: 0, life: 0.65 + Math.random() * 0.4,
-        color: colors[Math.floor(Math.random() * colors.length)]
+        colorIndex: Math.floor(Math.random() * colors.length)
       });
     }
     context.clearRect(0, 0, width, height);
@@ -94,7 +103,7 @@
       context.translate(strip.x, strip.y);
       context.rotate(strip.angle);
       context.globalAlpha = 0.85 * Math.max(0, Math.min(1, (strip.life - strip.age) / 0.3));
-      context.fillStyle = strip.color;
+      context.fillStyle = colors[strip.colorIndex];
       context.fillRect(-strip.width / 2, 0, strip.width, strip.length);
       context.restore();
     }
@@ -121,5 +130,10 @@
     if (document.hidden) stop();
   });
   reducedMotion.addEventListener('change', stop);
+  colorMode.addEventListener('change', updateColors);
+  new MutationObserver(updateColors).observe(document.documentElement, {
+    attributes: true, attributeFilter: ['data-theme']
+  });
+  updateColors();
   resize();
 })();

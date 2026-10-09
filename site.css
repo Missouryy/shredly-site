@@ -147,7 +147,13 @@ button { font: inherit; }
 .section-rule { border-top: 1px solid var(--line); }
 .statement { display: grid; grid-template-columns: .62fr 1fr; gap: 8%; align-items: center; padding-block: 74px; }
 .statement h2 { margin: 0; font: 400 clamp(2.35rem, 4vw, 4rem)/1.06 Georgia, "Times New Roman", serif; letter-spacing: -.055em; }
-.statement p:last-child { margin: 0; color: var(--muted); font-size: 1.12rem; }
+.island-intro { margin: 0; color: var(--muted); font-size: 1.08rem; }
+.island-gestures { margin: 26px 0 0; }
+.island-gestures > div { padding: 18px 0; border-top: 1px solid var(--line); }
+.island-gestures > div:last-child { padding-bottom: 0; }
+.island-gestures dt { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 750; }
+.island-gestures dt span { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--green-soft); color: var(--green); }
+.island-gestures dd { margin: 8px 0 0 38px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
 .features { padding-block: 24px 106px; }
 .section-heading { max-width: 650px; margin-bottom: 34px; }
 .section-heading h2 { margin: 0; font: 400 clamp(2.9rem, 5vw, 4.8rem)/1.05 Georgia, "Times New Roman", serif; letter-spacing: -.06em; }
